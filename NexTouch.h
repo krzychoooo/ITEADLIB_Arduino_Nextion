@@ -97,12 +97,21 @@ public: /* methods */
      * @return none. 
      */
     void detachPop(void);
-    
+
+    /**
+     * test element is released. 
+     * 
+     * @return bool. 
+     */
+    bool isPop(void);
+
 private: /* methods */ 
     void push(void);
     void pop(void);
     
 private: /* data */ 
+enum TOUCH_EVENT{NONE, PUSH, POP};
+    TOUCH_EVENT touchEvent;
     NexTouchEventCb __cb_push;
     void *__cbpush_ptr;
     NexTouchEventCb __cb_pop;
