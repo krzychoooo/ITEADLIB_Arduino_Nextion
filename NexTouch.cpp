@@ -64,6 +64,14 @@ void NexTouch::pop(void)
     }
 }
 
+bool NexTouch::isPop(void){
+    if(this->touchEvent == NexTouch::POP){
+        this->touchEvent = NexTouch::NONE;
+        return true;
+    }
+    return false;
+}
+
 void NexTouch::iterate(NexTouch **list, uint8_t pid, uint8_t cid, int32_t event)
 {
     NexTouch *e = NULL;
