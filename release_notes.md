@@ -1,6 +1,16 @@
 # Release Notes
 
 --------------------------------------------------------------------------------
+# Release v0..0
+
+  - version: v0.10.0
+  - base: v0.9.0
+  
+## Brief
+
+Add test function isPop() in component NexTouch class
+
+
 
 # Release v0.9.0
 
