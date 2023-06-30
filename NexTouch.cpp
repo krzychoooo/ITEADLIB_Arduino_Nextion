@@ -58,6 +58,7 @@ void NexTouch::push(void)
 
 void NexTouch::pop(void)
 {
+    this->touchEvent = POP;
     if (__cb_pop)
     {
         __cb_pop(__cbpop_ptr);
