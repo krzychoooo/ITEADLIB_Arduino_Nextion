@@ -76,6 +76,7 @@ bool NexRtc::write_rtc_time(uint32_t *time)
     char year[5],mon[3],day[3],hour[3],min[3],sec[3];
     String cmd = String("rtc");
     int i;
+    bool success = true;
     
      utoa(time[0],year,10);
      utoa(time[1],mon, 10);
@@ -88,38 +89,38 @@ bool NexRtc::write_rtc_time(uint32_t *time)
      cmd += "0=";
      cmd += year;
      sendCommand(cmd.c_str()); 
-     recvRetCommandFinished();
+     success &= recvRetCommandFinished();
         
      cmd = "";
      cmd += "rtc1=";
      cmd += mon;
      sendCommand(cmd.c_str());
-     recvRetCommandFinished();
+     success &= recvRetCommandFinished();
         
      cmd = "";
      cmd += "rtc2=";
      cmd += day;
      sendCommand(cmd.c_str());
-     recvRetCommandFinished();
+     success &= recvRetCommandFinished();
         
      cmd = "";
      cmd += "rtc3=";
      cmd += hour;
      sendCommand(cmd.c_str());
-     recvRetCommandFinished();
+     success &= recvRetCommandFinished();
         
      cmd = "";
      cmd += "rtc4=";
      cmd += min;
      sendCommand(cmd.c_str());
-     recvRetCommandFinished();
+     success &= recvRetCommandFinished();
         
      cmd = "";
      cmd += "rtc5=";
      cmd += sec;
      sendCommand(cmd.c_str());
-     recvRetCommandFinished();
- 
+     success &= recvRetCommandFinished();
+    return success;
 }
 
 bool NexRtc::write_rtc_time(char *time_type,uint32_t number)
