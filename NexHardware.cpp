@@ -42,10 +42,10 @@
  * @retval false - failed.
  *
  */
-bool recvRetNumber(uint32_t *number, uint32_t timeout)
+bool recvRetNumber(int32_t *number, uint32_t timeout)
 {
     bool ret = false;
-    uint8_t temp[8] = {0};
+    int8_t temp[8] = {0};
 
     if (!number)
     {
@@ -64,7 +64,7 @@ bool recvRetNumber(uint32_t *number, uint32_t timeout)
         && temp[7] == 0xFF
         )
     {
-        *number = ((uint32_t)temp[4] << 24) | ((uint32_t)temp[3] << 16) | (temp[2] << 8) | (temp[1]);
+        *number = ((int32_t)temp[4] << 24) | ((int32_t)temp[3] << 16) | (temp[2] << 8) | (temp[1]);
         ret = true;
     }
 
