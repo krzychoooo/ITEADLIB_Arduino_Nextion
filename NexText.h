@@ -163,6 +163,8 @@ public: /* methods */
      * @return true if success, false for failure
      */
     bool Set_background_image_pic(uint32_t number);	
+
+    bool SetVisabile(bool vis);
     
 };
 

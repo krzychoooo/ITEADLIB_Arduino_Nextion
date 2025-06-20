@@ -6,7 +6,7 @@
  * @author  huang xianming (email:<xianming.huang@itead.cc>)
  * @date    2015/8/13
  * @copyright 
- * Copyright (C) 2014-2015 ITEAD Intelligent Systems Co., Ltd. \n
+ * Copyright (C) 2014-2015 ITEAD Intelligent Systems Co., Ltd. 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 2 of

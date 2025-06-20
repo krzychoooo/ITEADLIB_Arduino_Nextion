@@ -232,5 +232,16 @@ bool NexText::Set_background_image_pic(uint32_t number)
 }
 
 
+bool NexText::SetVisabile(bool vis){
+    char buf[10] = {0};
+    String cmd;
 
+    utoa(vis, buf, 10);
+    cmd += "vis ";
+    cmd += getObjName();
+    cmd += ",";
+    cmd += buf;
+    sendCommand(cmd.c_str());
+    return recvRetCommandFinished();
+}
 

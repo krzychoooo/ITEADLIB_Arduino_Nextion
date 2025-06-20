@@ -42,19 +42,21 @@
  * @retval false - failed.
  *
  */
-bool recvRetNumber(int32_t *number, uint32_t timeout)
+bool recvRetNumber(uint32_t *number, uint32_t timeout)
 {
     bool ret = false;
-    int8_t temp[8] = {0};
-
+    uint8_t temp[8] = {0};
+    dbSerialPrintln("recvRetNumber");
     if (!number)
     {
         goto __return;
     }
     
     nexSerial.setTimeout(timeout);
-    if (sizeof(temp) != nexSerial.readBytes((char *)temp, sizeof(temp)))
+    size_t sizeFrame = nexSerial.readBytes((char *)temp, sizeof(temp));
+    if (sizeof(temp) != sizeFrame)
     {
+        dbSerialPrint("sizeFrame="); dbSerialPrintln(sizeFrame);
         goto __return;
     }
 
@@ -66,6 +68,13 @@ bool recvRetNumber(int32_t *number, uint32_t timeout)
     {
         *number = ((int32_t)temp[4] << 24) | ((int32_t)temp[3] << 16) | (temp[2] << 8) | (temp[1]);
         ret = true;
+    }
+    else{
+        for (size_t i = 0; i < 8; i++)
+        {
+            dbSerialPrint(i); dbSerialPrint("="); dbSerialPrint(temp[i]); dbSerialPrint("  ");
+        }
+        
     }
 
 __return:
@@ -190,8 +199,11 @@ bool recvRetCommandFinished(uint32_t timeout)
     uint8_t temp[4] = {0};
     
     nexSerial.setTimeout(timeout);
-    if (sizeof(temp) != nexSerial.readBytes((char *)temp, sizeof(temp)))
-    {
+    size_t lenframe = nexSerial.readBytes((char *)temp, sizeof(temp));
+    if (sizeof(temp) != lenframe){
+        dbSerialPrintln("\nrecvRetCommandFinished size error");
+        dbSerialPrint("sizeframe="); dbSerialPrintln(lenframe);
+        dbSerialPrint("timeOut="); dbSerialPrintln(timeout);
         ret = false;
     }
 
@@ -199,9 +211,15 @@ bool recvRetCommandFinished(uint32_t timeout)
         && temp[1] == 0xFF
         && temp[2] == 0xFF
         && temp[3] == 0xFF
-        )
-    {
+        ){
         ret = true;
+    }
+    else{
+        dbSerialPrintln("data error");
+        for (size_t i = 0; i < 4; i++){
+            dbSerialPrintHEX(temp[i]); dbSerialPrintln(" ");
+        }
+        
     }
 
     if (ret) 
@@ -225,10 +243,10 @@ bool nexInit(void)
     dbSerialBegin(9600);
     nexSerial.begin(9600);
     sendCommand("");
-    sendCommand("bkcmd=1");
-    ret1 = recvRetCommandFinished();
+    sendCommand("bkcmd=2");
+    ret1 = recvRetCommandFinished(500);
     sendCommand("page 0");
-    ret2 = recvRetCommandFinished();
+    ret2 = recvRetCommandFinished(500);
     return ret1 && ret2;
 }
 

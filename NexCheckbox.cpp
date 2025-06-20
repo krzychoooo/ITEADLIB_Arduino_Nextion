@@ -25,7 +25,7 @@ uint32_t NexCheckbox::getValue(uint32_t *number)
     cmd += getObjName();
     cmd += ".val";
     sendCommand(cmd.c_str());
-    return recvRetNumber(number);
+    return (uint32_t)recvRetNumber(number);
 }
 
 bool NexCheckbox::setValue(uint32_t number)
