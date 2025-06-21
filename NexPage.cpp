@@ -33,6 +33,7 @@ bool NexPage::show(void)
     String cmd = String("page ");
     cmd += name;
     sendCommand(cmd.c_str());
-    return recvRetCommandFinished();
+    // return recvRetCommandFinished();
+    return true;
 }
 

@@ -40,7 +40,8 @@ bool NexGauge::setValue(uint32_t number)
     cmd += buf;
 
     sendCommand(cmd.c_str());
-    return recvRetCommandFinished();
+    // return recvRetCommandFinished();
+    return true;
 }
 
 uint32_t NexGauge::Get_background_color_bco(uint32_t *number)

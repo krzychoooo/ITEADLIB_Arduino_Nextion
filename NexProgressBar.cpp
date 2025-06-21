@@ -40,7 +40,8 @@ bool NexProgressBar::setValue(uint32_t number)
     cmd += buf;
 
     sendCommand(cmd.c_str());
-    return recvRetCommandFinished();
+    // return recvRetCommandFinished();
+    return true;
 }
  
 uint32_t NexProgressBar::Get_background_color_bco(uint32_t *number)

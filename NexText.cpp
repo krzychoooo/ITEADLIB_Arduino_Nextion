@@ -37,7 +37,8 @@ bool NexText::setText(const char *buffer)
     cmd += buffer;
     cmd += "\"";
     sendCommand(cmd.c_str());
-    return recvRetCommandFinished();    
+    // return recvRetCommandFinished();    
+    return true;
 }
 
 uint32_t NexText::Get_background_color_bco(uint32_t *number)

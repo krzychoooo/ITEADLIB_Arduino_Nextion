@@ -46,6 +46,7 @@ bool recvRetNumber(uint32_t *number, uint32_t timeout)
 {
     bool ret = false;
     uint8_t temp[8] = {0};
+    size_t sizeFrame;
     dbSerialPrintln("recvRetNumber");
     if (!number)
     {
@@ -53,7 +54,7 @@ bool recvRetNumber(uint32_t *number, uint32_t timeout)
     }
     
     nexSerial.setTimeout(timeout);
-    size_t sizeFrame = nexSerial.readBytes((char *)temp, sizeof(temp));
+    sizeFrame = nexSerial.readBytes((char *)temp, sizeof(temp));
     if (sizeof(temp) != sizeFrame)
     {
         dbSerialPrint("sizeFrame="); dbSerialPrintln(sizeFrame);
